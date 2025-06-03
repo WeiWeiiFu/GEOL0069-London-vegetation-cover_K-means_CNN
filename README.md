@@ -255,7 +255,7 @@ if __name__ == "__main__":
 | CNN                 |        40.10 |
 
 
-## Getting Starte
+## Getting Start
 This project was created using Google Colab. To get a copy of this project up and running, follow these steps:
 
 1.Clone or download the repository
@@ -289,7 +289,7 @@ This section quantifies the energy consumption and associated CO₂ emissions in
 	•	Measured runtime: ~ 30 seconds.
 	•	Energy consumed:45 W × (30 s ÷ 3600 s/h) = 0.000375 kWh
         •	CO₂ emissions (0.4 kg CO₂/kWh): 0.000375 kWh × 0.4 kg CO₂/kWh = 0.00015 kg CO₂ ≈ 0.15 g CO₂
-2. U-Net Model Training (GPU)
+2. CNN Training (GPU)
 	•	Patch sampling: 30 000 patches of size 64 × 64.
 	•	Model: A small U-Net (approx. two down-sampling and two up-sampling layers).
 	•	Hardware: Google Colab Tesla T4 GPU (≈ 70 W average when training).
@@ -309,7 +309,7 @@ This section quantifies the energy consumption and associated CO₂ emissions in
 |                            | Energy (kWh)  | CO₂ Emissions (g) |
 |----------------------------|--------------:|------------------:|
 | K-means (CPU)              |       0.00038 |             0.15  |
-| U-Net Training (GPU)       |       0.17500 |            70.00  |
+| CNN Training (GPU)         |       0.17500 |            70.00  |
 | Full-Image Inference (GPU) |       0.00058 |             0.23  |
 | **Total**                  |     **0.1760**|          **70.38**|
 
