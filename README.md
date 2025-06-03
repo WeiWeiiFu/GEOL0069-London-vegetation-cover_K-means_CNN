@@ -20,10 +20,15 @@ Interpretation: Positive NDVI values (0 to 1) generally indicate vegetation, wit
 ## K-Means clustering
 ### Key Components of K-means
 Choosing K: The number of clusters (k) is a parameter that needs to be specified before applying the algorithm.
+
 Centroids Initialization: The initial placement of the centroids can affect the final results.
+
 Assignment Step: Each data point is assigned to its nearest centroid, based on the squared Euclidean distance.
+
 Update Step: The centroids are recomputed as the center of all the data points assigned to the respective cluster.
+
 K-means clustering is a type of unsupervised learning algorithm used for partitioning a dataset into a set of k groups (or clusters), where k represents the number of groups pre-specified by the analyst. It classifies the data points based on the similarity of the features of the data. The basic idea is to define k centroids, one for each cluster, and then assign each data point to the nearest centroid, while keeping the centroids as small as possible.
+
 Advantages of K-means:
 Efficiency: K-means is computationally efficient. Ease of interpretation: The results of k-means clustering are easy to understand and interpret.
 import rasterio, numpy as np
@@ -95,11 +100,15 @@ plt.show()
 ### Key Components of CNN
 
 Convolutional Layer : This is the core building block of a CNN. It slides a filter (smaller in size than the input data) over the input data (like an image) to produce a feature map or convolved feature. The primary purpose of a convolution is to extract features from the input data.
+
 Pooling Layer: Pooling layers are used to reduce the dimensions of the feature maps, thereby reducing the number of parameters and computation in the network. The most common type of pooling is max pooling.
+
 Fully Connected Layer: After several convolutional and pooling layers, the final classification is done using one or more fully connected layers. Neurons in a fully connected layer have connections to all activations in the previous layer, as seen in regular neural networks.
+
 Activation Functions: Non-linearity is introduced into the CNN using activation functions. The Rectified Linear Unit (ReLU) is the most commonly used activation function in CNNs.
 
 Convolutional Neural Networks, commonly known as CNNs, are a class of deep neural networks specially designed to process data with grid-like topology, such as images. Originating from the visual cortex’s biological processes, CNNs are revolutionising the way we understand and interpret visual data.
+
 Advantages of CNNs:
 Parameter Sharing: A feature detector (filter) that’s useful in one part of the image can be useful in another part of the image Sparsity of Connections: In each layer, each output value depends only on a small number of input values, making the computation more efficient.
 
@@ -243,18 +252,26 @@ if __name__ == "__main__":
 | Method              | Coverage (%) |
 |---------------------|-------------:|
 | K-means (k = 3)     |        43.88 |
-| CNN                 |        45.77 |
+| CNN                 |        40.10 |
 
 
 ## Getting Starte
 This project was created using Google Colab. To get a copy of this project up and running, follow these steps:
+
 1.Clone or download the repository
+
 2.Open the notebook in Google Colab
+
 3.Acquire the Sentinel-2 NDVI GeoTIFF file
+
 4.Ensure the notebook paths point to your NDVI file
+
 5.Adjust any other file paths or parameters
+
 6.Install required Python packages 
+
 7.Run the notebook cells in order
+
 8.Replace with your own imagery
 	•	If you want to experiment on a different city or region, simply supply your own NDVI GeoTIFF (with the same coordinate system and dimensions) and update NDVI_PATH.
 	•	The clustering and U-Net workflow remain unchanged, but you may need to adjust the patch extraction size or threshold (THRESH_VEG) based on local NDVI distributions.
@@ -319,9 +336,15 @@ Link - https://github.com/WeiWeiiFu/GEOL0069-London-vegetation-cover_K-means_CNN
 This project was created for GEOL0069 at University College London, taught by Dr. Michel Tsamados and Weibin Chen.
 ## References:
 Ian Goodfellow, Yoshua Bengio, and Aaron Courville. Deep Learning. MIT Press, 2016. http://www.deeplearningbook.org.
+
 Yann LeCun, Yoshua Bengio, and Geoffrey Hinton. Deep learning. Nature, 521(7553):436–444, May 2015. doi:10.1038/nature14539.
+
 Alex Krizhevsky, Ilya Sutskever, and Geoffrey E Hinton. Imagenet classification with deep convolutional neural networks. Advances in neural information processing systems, 2012.
-James MacQueen and others. Some methods for classification and analysis of multivariate observations. In Proceedings of the fifth Berkeley symposium on mathematical statistics and probability, volume 1, 281–297. Oakland, CA, USA, 1967.
+
+James MacQueen and others. Some methods for classification and analysis of multivariate observations. In Proceedings of the fifth 
+
+Berkeley symposium on mathematical statistics and probability, volume 1, 281–297. Oakland, CA, USA, 1967.
+
 
 
 
