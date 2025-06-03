@@ -6,6 +6,8 @@ Using k-means and CNN classification to analyse SENTINEL-2 satellite data for Lo
 
 ## A description of the problem to be tackled 
 Urban vegetation is crucial for environmental quality and city planning, yet mapping green spaces at scale is challenging. This project tackles automatic vegetation cover classification in London using Sentinel-2 satellite imagery. We exploit the Normalized Difference Vegetation Index (NDVI) – a spectral index highlighting live green vegetation – to differentiate vegetated and non-vegetated land cover. Our goal is to compare an unsupervised approach (K-means clustering on NDVI data) with a weakly-supervised deep learning approach (U-Net convolutional neural network) for detecting vegetation. By leveraging Earth observation data and AI, we demonstrate how urban green areas can be mapped with minimal manual labels, which is valuable for urban planners and ecologists.
+Urban vegetation plays a vital role in mitigating the adverse effects of urbanization and climate change. It significantly contributes to improving thermal comfort, carbon storage capacity, rainwater infiltration, pollutant absorption and biodiversity enhancement in cities. With the acceleration of urbanization, it is expected that by 2050, 68% of the world's population will live in urban areas, which exacerbates challenges such as urban heat islands and makes urban green space a priority that needs to be addressed. The goal of this project is to use artificial intelligence technology to map and quantify the vegetation cover in Greater London from Sentinel-2 imagery obtained from Google EE.
+
 ## Data sources
 Google EE
 https://console.cloud.google.com/earth-engine/configuration;success=true?inv=1&invt=AbzGzg&project=silver-bird-461614-i1
@@ -16,6 +18,11 @@ Calculation: NDVI is calculated using the following formula: (NIR - RED) / (NIR 
 Interpretation: Positive NDVI values (0 to 1) generally indicate vegetation, with higher values indicating more active and healthy vegetation. Values close to 0 (or slightly negative) often represent barren areas, soil, or water. Negative values (close to -1) are typically associated with water bodies.
 <img width="461" alt="Screenshot 2025-06-03 at 08 18 48" src="https://github.com/user-attachments/assets/795cae92-4f6d-4e1c-994f-d0de933b11ff" />
 ## K-Means clustering
+### Key Components of K-means
+Choosing K: The number of clusters (k) is a parameter that needs to be specified before applying the algorithm.
+Centroids Initialization: The initial placement of the centroids can affect the final results.
+Assignment Step: Each data point is assigned to its nearest centroid, based on the squared Euclidean distance.
+Update Step: The centroids are recomputed as the center of all the data points assigned to the respective cluster.
 K-means clustering is a type of unsupervised learning algorithm used for partitioning a dataset into a set of k groups (or clusters), where k represents the number of groups pre-specified by the analyst. It classifies the data points based on the similarity of the features of the data. The basic idea is to define k centroids, one for each cluster, and then assign each data point to the nearest centroid, while keeping the centroids as small as possible.
 Advantages of K-means:
 Efficiency: K-means is computationally efficient. Ease of interpretation: The results of k-means clustering are easy to understand and interpret.
@@ -83,7 +90,15 @@ plt.tight_layout()
 plt.show()
 
 <img width="1215" alt="Screenshot 2025-06-03 at 08 22 07" src="https://github.com/user-attachments/assets/92fb00b9-9da1-4794-9b3b-31af0502851b" />
+
 ## CNN - Convolutional Neural Networksv
+### Key Components of CNN
+
+Convolutional Layer : This is the core building block of a CNN. It slides a filter (smaller in size than the input data) over the input data (like an image) to produce a feature map or convolved feature. The primary purpose of a convolution is to extract features from the input data.
+Pooling Layer: Pooling layers are used to reduce the dimensions of the feature maps, thereby reducing the number of parameters and computation in the network. The most common type of pooling is max pooling.
+Fully Connected Layer: After several convolutional and pooling layers, the final classification is done using one or more fully connected layers. Neurons in a fully connected layer have connections to all activations in the previous layer, as seen in regular neural networks.
+Activation Functions: Non-linearity is introduced into the CNN using activation functions. The Rectified Linear Unit (ReLU) is the most commonly used activation function in CNNs.
+
 Convolutional Neural Networks, commonly known as CNNs, are a class of deep neural networks specially designed to process data with grid-like topology, such as images. Originating from the visual cortex’s biological processes, CNNs are revolutionising the way we understand and interpret visual data.
 Advantages of CNNs:
 Parameter Sharing: A feature detector (filter) that’s useful in one part of the image can be useful in another part of the image Sparsity of Connections: In each layer, each output value depends only on a small number of input values, making the computation more efficient.
@@ -222,6 +237,15 @@ if __name__ == "__main__":
         plt.tight_layout(); plt.show()
     
 <img width="1240" alt="Screenshot 2025-06-03 at 08 26 02" src="https://github.com/user-attachments/assets/1b22ce8f-767e-42f3-bcf4-adefdc68d55b" />
+
+### London Vegetation Cover 
+
+| Method              | Coverage (%) |
+|---------------------|-------------:|
+| K-means (k = 3)     |        43.88 |
+| CNN                 |        45.77 |
+
+
 ## Getting Starte
 This project was created using Google Colab. To get a copy of this project up and running, follow these steps:
 1.Clone or download the repository
@@ -236,12 +260,49 @@ This project was created using Google Colab. To get a copy of this project up an
 	•	The clustering and U-Net workflow remain unchanged, but you may need to adjust the patch extraction size or threshold (THRESH_VEG) based on local NDVI distributions.
 ## A figure illustrating the remote sensing technique
 <img width="612" alt="Screenshot 2025-06-03 at 08 51 12" src="https://github.com/user-attachments/assets/52050438-0102-4e68-bda3-160fe476210f" />
+
 ## A figure illustrating the AI algorithm and its implementation
+<img width="599" alt="Screenshot 2025-06-03 at 08 54 11" src="https://github.com/user-attachments/assets/079d8b93-af56-45ae-991c-c024d1dd9336" />
+
+## Environmental Cost Assessment
+This section quantifies the energy consumption and associated CO₂ emissions incurred by our London vegetation‐cover project (Sentinel-2 NDVI, K-means, and a lightweight U-Net CNN). We focus on the main sources of energy use—unsupervised K-means clustering (CPU), U-Net model training (GPU), and full-image inference (GPU/CPU)—and convert each to an estimated carbon footprint.
+1. K-means Clustering (CPU)
+	•	Data size: One Sentinel-2 NDVI raster for Greater London (≈ 452 × 940 pixels ≈ 425 000 values).
+	•	Hardware: Google Colab’s CPU (≈ 45 W average power draw).
+	•	Measured runtime: ~ 30 seconds.
+	•	Energy consumed:45 W × (30 s ÷ 3600 s/h) = 0.000375 kWh
+        •	CO₂ emissions (0.4 kg CO₂/kWh): 0.000375 kWh × 0.4 kg CO₂/kWh = 0.00015 kg CO₂ ≈ 0.15 g CO₂
+2. U-Net Model Training (GPU)
+	•	Patch sampling: 30 000 patches of size 64 × 64.
+	•	Model: A small U-Net (approx. two down-sampling and two up-sampling layers).
+	•	Hardware: Google Colab Tesla T4 GPU (≈ 70 W average when training).
+	•	Configuration:
+	  •	Batch size: 32
+	  •	Epochs: 10 (observed ~ 15 min per epoch; total ~ 2.5 h)
+	•	Energy used: 70 W × 2.5 h = 0.175 kWh
+	•	CO₂ emissions (0.4 kg CO₂/kWh): 0.175 kWh × 0.4 kg CO₂/kWh = 0.07 kg CO₂ = 70 g CO₂
+3. Full-Image Inference (GPU/CPU)
+	•	Task: Run model.predict() on the entire 452 × 940 NDVI image.
+	•	Hardware: Tesla T4 GPU (or fallback to CPU).
+	•	Runtime: ~ 30 seconds.
+	•	Energy used: 70 W × (30 s ÷ 3600 s/h) = 0.000583 kWh
+	•	CO₂ emissions (0.4 kg CO₂/kWh):0.000583 kWh × 0.4 kg CO₂/kWh = 0.000233 kg CO₂ ≈ 0.23 g CO₂
+### 4. Total Energy & CO₂ Emissions
+
+|                            | Energy (kWh)  | CO₂ Emissions (g) |
+|----------------------------|--------------:|------------------:|
+| K-means (CPU)              |       0.00038 |             0.15  |
+| U-Net Training (GPU)       |       0.17500 |            70.00  |
+| Full-Image Inference (GPU) |       0.00058 |             0.23  |
+| **Total**                  |     **0.1760**|          **70.38**|
+
+- **Total energy**: 0.176 kWh  
+- **Total CO₂**: 0.0738 kg (≈ 70 g)
+Context: 70 g CO₂ is roughly the same as charging a smartphone several times or driving an electric car for a few hundred meters, so this workflow is very lightweight in environmental impact.
 
 
-## Environmental Cost
 
-## Tutorial video
+## Video
 https://youtu.be/hDvfrgatk9Y?feature=shared
 
 ## LIcense
@@ -257,7 +318,10 @@ Link - https://github.com/WeiWeiiFu/GEOL0069-London-vegetation-cover_K-means_CNN
 ## Acknowledgments
 This project was created for GEOL0069 at University College London, taught by Dr. Michel Tsamados and Weibin Chen.
 ## References:
-
+Ian Goodfellow, Yoshua Bengio, and Aaron Courville. Deep Learning. MIT Press, 2016. http://www.deeplearningbook.org.
+Yann LeCun, Yoshua Bengio, and Geoffrey Hinton. Deep learning. Nature, 521(7553):436–444, May 2015. doi:10.1038/nature14539.
+Alex Krizhevsky, Ilya Sutskever, and Geoffrey E Hinton. Imagenet classification with deep convolutional neural networks. Advances in neural information processing systems, 2012.
+James MacQueen and others. Some methods for classification and analysis of multivariate observations. In Proceedings of the fifth Berkeley symposium on mathematical statistics and probability, volume 1, 281–297. Oakland, CA, USA, 1967.
 
 
 
